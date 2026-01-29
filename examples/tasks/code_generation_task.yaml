@@ -1,0 +1,53 @@
+task_id: task_002
+name: Code Generation Quality
+description: Evaluate the quality and correctness of generated code
+category: code_generation
+
+criteria:
+  - name: syntax_correctness
+    type: manual
+    weight: 0.4
+    description: Generated code must be syntactically correct
+  
+  - name: completeness
+    type: keyword_presence
+    keywords:
+      - function
+      - return
+      - def
+    weight: 0.3
+    description: Code should include necessary components
+  
+  - name: documentation
+    type: keyword_presence
+    keywords:
+      - docstring
+      - comment
+      - """
+    weight: 0.3
+    description: Code should include documentation
+
+metrics:
+  - name: lines_of_code
+    description: Number of lines in generated code
+  
+  - name: cyclomatic_complexity
+    description: Measure of code complexity
+  
+  - name: test_coverage
+    description: Percentage of code covered by tests
+
+test_cases:
+  - input: "Write a Python function to calculate factorial"
+    expected_output: "def factorial(n): ..."
+    success_criteria:
+      - Valid Python syntax
+      - Handles edge cases
+      - Includes docstring
+  
+  - input: "Create a REST API endpoint"
+    expected_output: "API endpoint with proper error handling"
+    success_criteria:
+      - Follows REST conventions
+      - Includes validation
+      - Has error handling

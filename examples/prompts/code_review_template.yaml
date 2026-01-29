@@ -1,0 +1,54 @@
+template_id: template_002
+name: Code Review Template
+description: Template for generating code review prompts
+category: code_review
+
+system_prompt: |
+  You are an experienced software engineer performing code reviews.
+  Focus on code quality, best practices, security, and maintainability.
+  Provide constructive feedback with specific suggestions for improvement.
+
+user_template: |
+  Please review the following code:
+  
+  Language: {language}
+  Purpose: {purpose}
+  
+  Code:
+  ```{language}
+  {code}
+  ```
+  
+  Review Aspects:
+  - Code quality and readability
+  - Best practices and conventions
+  - Potential bugs or issues
+  - Security considerations
+  - Performance optimization
+  - Suggestions for improvement
+
+variables:
+  - name: language
+    type: string
+    required: true
+    description: Programming language of the code
+  
+  - name: purpose
+    type: string
+    required: true
+    description: Purpose or functionality of the code
+  
+  - name: code
+    type: string
+    required: true
+    description: The code to be reviewed
+
+examples:
+  - language: "python"
+    purpose: "Calculate factorial of a number"
+    code: |
+      def factorial(n):
+          if n == 0:
+              return 1
+          return n * factorial(n-1)
+    expected_output: "The code is correct but could be improved by adding input validation and handling negative numbers..."

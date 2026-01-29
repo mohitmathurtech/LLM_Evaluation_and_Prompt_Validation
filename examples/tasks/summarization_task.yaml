@@ -1,0 +1,50 @@
+task_id: task_001
+name: Text Summarization Quality
+description: Evaluate the quality of text summarization outputs
+category: summarization
+
+criteria:
+  - name: conciseness
+    type: length
+    min_length: 50
+    max_length: 300
+    weight: 0.3
+    description: Summary should be concise and within length limits
+  
+  - name: key_information
+    type: keyword_presence
+    keywords:
+      - main point
+      - conclusion
+      - key finding
+    weight: 0.4
+    description: Summary must capture key information
+  
+  - name: clarity
+    type: manual
+    weight: 0.3
+    description: Summary should be clear and easy to understand
+
+metrics:
+  - name: word_count
+    description: Number of words in the summary
+  
+  - name: compression_ratio
+    description: Ratio of summary length to original text length
+  
+  - name: readability_score
+    description: Flesch reading ease score
+
+test_cases:
+  - input: "Long article about climate change..."
+    expected_output: "Brief summary highlighting main points about climate change"
+    success_criteria:
+      - Contains key terms
+      - Within length limits
+      - Maintains accuracy
+  
+  - input: "Research paper on AI ethics..."
+    expected_output: "Concise summary of ethical considerations"
+    success_criteria:
+      - Captures main ethical concerns
+      - Clear and structured

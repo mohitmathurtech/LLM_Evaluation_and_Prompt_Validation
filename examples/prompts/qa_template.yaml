@@ -1,0 +1,41 @@
+template_id: template_001
+name: Question Answering Template
+description: Template for generating question-answering prompts
+category: qa
+
+system_prompt: |
+  You are a helpful AI assistant that provides accurate and informative answers.
+  Always cite sources when possible and acknowledge uncertainty when appropriate.
+
+user_template: |
+  Please answer the following question:
+  
+  Question: {question}
+  
+  Context: {context}
+  
+  Requirements:
+  - Provide a clear and concise answer
+  - Use information from the context when available
+  - Cite sources if applicable
+  - If unsure, acknowledge the uncertainty
+
+variables:
+  - name: question
+    type: string
+    required: true
+    description: The question to be answered
+  
+  - name: context
+    type: string
+    required: true
+    description: Relevant context information for answering the question
+
+examples:
+  - question: "What is machine learning?"
+    context: "Machine learning is a subset of artificial intelligence..."
+    expected_output: "Machine learning is a subset of AI that enables systems to learn from data..."
+  
+  - question: "How does photosynthesis work?"
+    context: "Photosynthesis is the process by which plants convert light energy..."
+    expected_output: "Photosynthesis is the process where plants use light energy to convert CO2 and water into glucose..."
