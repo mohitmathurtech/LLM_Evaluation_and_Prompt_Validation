@@ -64,14 +64,23 @@ class ErrorCategorizer:
     ) -> Optional[ErrorInstance]:
         """
         Detect potential hallucinations in the response.
+
+        This implementation uses a simple, keyword-based heuristic to flag
+        potentially hallucinated content. It does not currently perform any
+        fact-checking or comparison against the provided ``facts`` or
+        ``context`` values; those parameters are accepted for interface
+        compatibility and potential future extensions.
         
         Args:
-            response: The LLM-generated response
-            facts: List of verified facts to check against
-            context: Optional context used for generation
+            response: The LLM-generated response.
+            facts: Optional list of verified facts related to the response.
+                Currently unused by this heuristic implementation.
+            context: Optional context used for generation of the response.
+                Currently unused by this heuristic implementation.
             
         Returns:
-            ErrorInstance if hallucination detected, None otherwise
+            ErrorInstance if a potential hallucination is detected by the
+            heuristic, None otherwise.
         """
         # Simple keyword-based detection (can be enhanced with ML models)
         hallucination_indicators = [
