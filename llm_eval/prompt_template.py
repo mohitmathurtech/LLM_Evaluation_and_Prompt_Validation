@@ -5,7 +5,7 @@ Manages prompt templates loaded from YAML files.
 Templates define reusable prompt structures for LLM interactions.
 """
 
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List, Optional, Tuple
 from pathlib import Path
 from .yaml_loader import YAMLLoader
 
@@ -81,7 +81,7 @@ class PromptTemplate:
         except KeyError as e:
             raise ValueError(f"Missing required variable: {e}")
     
-    def validate(self) -> tuple[bool, List[str]]:
+    def validate(self) -> Tuple[bool, List[str]]:
         """
         Validate the prompt template.
         

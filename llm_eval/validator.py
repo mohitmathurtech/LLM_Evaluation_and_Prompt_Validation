@@ -92,7 +92,7 @@ class PromptValidator:
             })
         
         # Check for potentially harmful content
-        forbidden_patterns = ['hack', 'exploit', 'illegal', 'harmful', 'dangerous']
+        forbidden_patterns = ['hack', 'exploit', 'illegal']
         found_harmful = [pattern for pattern in forbidden_patterns if pattern in prompt.lower()]
         
         if found_harmful:

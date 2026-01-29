@@ -5,7 +5,7 @@ Defines and manages task structures loaded from YAML files.
 Tasks represent evaluation scenarios for LLM outputs.
 """
 
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List, Optional, Tuple
 from pathlib import Path
 from .yaml_loader import YAMLLoader
 
@@ -65,7 +65,7 @@ class TaskStructure:
         data = YAMLLoader.load_string(yaml_string)
         return cls(data)
     
-    def validate(self) -> tuple[bool, List[str]]:
+    def validate(self) -> Tuple[bool, List[str]]:
         """
         Validate the task structure.
         

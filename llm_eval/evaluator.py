@@ -46,14 +46,17 @@ class LLMEvaluator:
         
         # Evaluate each criterion
         total_score = 0.0
+        total_weight = 0.0
         for criterion in self.task.criteria:
             result = self._evaluate_criterion(output, criterion, context)
             evaluation['criteria_results'].append(result)
-            total_score += result['score']
+            weight = criterion.get('weight', 1.0)
+            total_score += result['score'] * weight
+            total_weight += weight
         
         # Calculate overall score
-        if self.task.criteria:
-            evaluation['overall_score'] = total_score / len(self.task.criteria)
+        if self.task.criteria and total_weight > 0:
+            evaluation['overall_score'] = total_score / total_weight
             evaluation['passed'] = evaluation['overall_score'] >= 0.7  # 70% threshold
         
         self.results.append(evaluation)
@@ -97,14 +100,17 @@ class LLMEvaluator:
         
         elif criterion_type == 'keyword_presence':
             required_keywords = criterion.get('keywords', [])
-            found_keywords = [kw for kw in required_keywords if kw.lower() in output.lower()]
-            
-            if found_keywords:
-                result['score'] = len(found_keywords) / len(required_keywords)
-                result['passed'] = result['score'] >= 0.7
-                result['details'] = f"Found {len(found_keywords)}/{len(required_keywords)} required keywords"
+            if required_keywords:
+                found_keywords = [kw for kw in required_keywords if kw.lower() in output.lower()]
+                
+                if found_keywords:
+                    result['score'] = len(found_keywords) / len(required_keywords)
+                    result['passed'] = result['score'] >= 0.7
+                    result['details'] = f"Found {len(found_keywords)}/{len(required_keywords)} required keywords"
+                else:
+                    result['details'] = "No required keywords found"
             else:
-                result['details'] = "No required keywords found"
+                result['details'] = "No keywords defined for evaluation"
         
         elif criterion_type == 'manual':
             # Manual evaluation placeholder
