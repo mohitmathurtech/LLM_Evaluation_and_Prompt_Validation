@@ -141,13 +141,20 @@ def run_benchmark_tests(dataset_path, sample_responses):
     # Summary
     passed = sum(1 for r in results if r["passed"])
     failed = len(results) - passed
+
+    if results:
+        passed_pct = passed / len(results) * 100
+        failed_pct = failed / len(results) * 100
+    else:
+        passed_pct = 0.0
+        failed_pct = 0.0
     
     print("=" * 70)
     print("SUMMARY")
     print("=" * 70)
     print(f"Total Tests: {len(results)}")
-    print(f"Passed: {passed} ({passed/len(results)*100:.1f}%)")
-    print(f"Failed: {failed} ({failed/len(results)*100:.1f}%)")
+    print(f"Passed: {passed} ({passed_pct:.1f}%)")
+    print(f"Failed: {failed} ({failed_pct:.1f}%)")
     
     if results:
         avg_score = sum(r["metrics"]["overall_score"] for r in results) / len(results)
