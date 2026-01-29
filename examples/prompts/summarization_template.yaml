@@ -1,0 +1,52 @@
+template_id: template_003
+name: Text Summarization Template
+description: Template for generating text summarization prompts
+category: summarization
+
+system_prompt: |
+  You are an AI assistant specialized in creating clear and concise summaries.
+  Focus on capturing the main points while maintaining accuracy and context.
+
+user_template: |
+  Please summarize the following text:
+  
+  Text:
+  {text}
+  
+  Summary Requirements:
+  - Length: {summary_length} words
+  - Style: {style}
+  - Focus: {focus_area}
+  
+  Ensure the summary captures the key points and maintains the original meaning.
+
+variables:
+  - name: text
+    type: string
+    required: true
+    description: The text to be summarized
+  
+  - name: summary_length
+    type: integer
+    required: false
+    default: 100
+    description: Target length of the summary in words
+  
+  - name: style
+    type: string
+    required: false
+    default: "neutral"
+    description: Writing style (e.g., formal, casual, technical)
+  
+  - name: focus_area
+    type: string
+    required: false
+    default: "main points"
+    description: Specific aspect to focus on in the summary
+
+examples:
+  - text: "Long article about artificial intelligence and its impact on society..."
+    summary_length: "100"
+    style: "formal"
+    focus_area: "societal impact"
+    expected_output: "AI is transforming society through automation and data analysis, raising important questions about employment, privacy, and ethics..."

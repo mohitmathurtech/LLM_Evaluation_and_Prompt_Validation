@@ -19,6 +19,21 @@ parts/
 sdist/
 var/
 wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
 *.egg-info/
 .installed.cfg
 *.egg
@@ -40,6 +55,10 @@ htmlcov/
 .DS_Store
 Thumbs.db
 
+# Temporary files
+*.log
+*.tmp
+/tmp/
 # Logs
 *.log
 
