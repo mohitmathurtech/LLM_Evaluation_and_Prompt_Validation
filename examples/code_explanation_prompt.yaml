@@ -1,0 +1,29 @@
+name: code_explanation_prompt
+description: Template for explaining code snippets
+category: code-analysis
+tags:
+  - programming
+  - education
+  - code-review
+variables:
+  - code
+  - language
+instructions:
+  - Explain the code step-by-step
+  - Identify the programming language
+  - Must include purpose explanation
+  - Describe what each section does
+template: |
+  Please explain the following {language} code in detail.
+  Break down the code step-by-step and explain what each part does.
+  
+  Code:
+  ```{language}
+  {code}
+  ```
+  
+  Your explanation should include:
+  1. Overall purpose of the code
+  2. Step-by-step breakdown of logic
+  3. Any important concepts or patterns used
+expected_output_format: Structured explanation with numbered steps

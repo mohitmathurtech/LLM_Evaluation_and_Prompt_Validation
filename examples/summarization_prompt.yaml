@@ -1,0 +1,23 @@
+name: summarization_prompt
+description: Template for text summarization tasks
+category: summarization
+tags:
+  - text-processing
+  - content-generation
+variables:
+  - text
+  - max_length
+instructions:
+  - Summarize the provided text concisely
+  - Focus on key points and main ideas
+  - Must include main topic
+  - Avoid unnecessary details
+template: |
+  Please summarize the following text in no more than {max_length} words.
+  Focus on the main ideas and key points.
+  
+  Text to summarize:
+  {text}
+  
+  Provide a clear and concise summary that captures the essence of the content.
+expected_output_format: A concise paragraph summarizing the main points
