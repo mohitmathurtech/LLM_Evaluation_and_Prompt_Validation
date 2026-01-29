@@ -20,9 +20,6 @@ ACCEPTABLE_SENTENCE_MAX = 35
 MIN_REASONING_INDICATORS = 2
 MAX_REASONING_INDICATORS = 5
 
-# Error categorizer constants
-MAX_AVG_SENTENCE_LENGTH_WORDS = 40
-
 
 class ValidationStatus(Enum):
     """Status of validation result."""

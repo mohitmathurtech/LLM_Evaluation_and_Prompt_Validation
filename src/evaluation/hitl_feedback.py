@@ -190,9 +190,7 @@ class HITLFeedbackSystem:
         Returns:
             Dictionary with feedback statistics
         """
-        if not self.feedback_history:
-            return {}
-        
+
         feedback_types = {}
         quality_ratings = []
         

@@ -13,10 +13,7 @@ from src.evaluation.error_categorizer import (
     ErrorCategorizer,
     ErrorType,
     ErrorSeverity,
-    ErrorInstance
 )
-
-
 class TestErrorCategorizer(unittest.TestCase):
     """Test cases for ErrorCategorizer class."""
     

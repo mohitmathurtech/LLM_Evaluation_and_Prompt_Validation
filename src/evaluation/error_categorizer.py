@@ -211,8 +211,11 @@ class ErrorCategorizer:
             ErrorInstance if clarity issues detected, None otherwise
         """
         # Simple heuristics for clarity
-        sentences = response.split('.')
-        avg_sentence_length = sum(len(s.split()) for s in sentences) / max(len(sentences), 1)
+        # Split on periods and filter out empty/whitespace-only segments so only real sentences count
+        sentences = [s for s in response.split('.') if s.strip()]
+        if not sentences:
+            return None
+        avg_sentence_length = sum(len(s.split()) for s in sentences) / len(sentences)
         
         if avg_sentence_length > MAX_AVG_SENTENCE_LENGTH_WORDS:
             error = ErrorInstance(

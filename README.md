@@ -62,7 +62,7 @@ LLM_Evaluation_and_Prompt_Validation/
 │   ├── summarization_prompt.yaml
 │   ├── code_explanation_prompt.yaml
 │   └── factual_qa_prompt.yaml
-└── data/                             # Evaluation datasets (future)
+└── data/                             # Evaluation datasets (e.g., benchmark_dataset.yaml)
 ```
 
 ## 🔧 Installation

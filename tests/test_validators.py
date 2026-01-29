@@ -38,7 +38,7 @@ class TestResponseValidator(unittest.TestCase):
         result = self.validator.validate_response(response, prompt, expected_elements)
         
         # The response may be too short, so check status is not failed due to critical issues
-        self.assertIn(result.status, [ValidationStatus.PASSED, ValidationStatus.WARNING, ValidationStatus.FAILED])
+        self.assertNotEqual(result.status, ValidationStatus.FAILED)
         self.assertGreater(result.overall_score, 0.5)
     
     def test_validate_clarity_good(self):

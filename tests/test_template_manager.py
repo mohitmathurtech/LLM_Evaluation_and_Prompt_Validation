@@ -11,7 +11,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 import unittest
 import tempfile
 import yaml
-from pathlib import Path
+
 from src.prompts.template_manager import (
     PromptTemplate,
     PromptTemplateManager,
