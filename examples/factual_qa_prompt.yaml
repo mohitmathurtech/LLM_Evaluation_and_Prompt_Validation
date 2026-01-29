@@ -1,0 +1,29 @@
+name: factual_qa_prompt
+description: Template for factual question answering
+category: question-answering
+tags:
+  - qa
+  - facts
+  - knowledge
+variables:
+  - question
+  - context
+instructions:
+  - Answer based only on provided context
+  - Must include source references
+  - Do not make assumptions beyond the context
+  - If answer is not in context, state clearly
+template: |
+  Answer the following question based solely on the provided context.
+  Do not use external knowledge or make assumptions.
+  
+  Context:
+  {context}
+  
+  Question: {question}
+  
+  Instructions:
+  - Provide a direct answer to the question
+  - Reference specific parts of the context that support your answer
+  - If the answer cannot be found in the context, state "The answer is not provided in the given context"
+expected_output_format: A clear answer followed by supporting evidence from context

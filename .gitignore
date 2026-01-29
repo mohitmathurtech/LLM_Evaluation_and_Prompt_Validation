@@ -4,6 +4,9 @@ __pycache__/
 *$py.class
 *.so
 .Python
+env/
+venv/
+ENV/
 build/
 develop-eggs/
 dist/
@@ -31,6 +34,11 @@ env.bak/
 venv.bak/
 
 # IDE
+*.egg-info/
+.installed.cfg
+*.egg
+
+# IDEs
 .vscode/
 .idea/
 *.swp
@@ -41,6 +49,7 @@ venv.bak/
 .pytest_cache/
 .coverage
 htmlcov/
+.tox/
 
 # OS
 .DS_Store
@@ -50,3 +59,10 @@ Thumbs.db
 *.log
 *.tmp
 /tmp/
+# Logs
+*.log
+
+# Temporary files
+tmp/
+temp/
+*.tmp
