@@ -9,7 +9,7 @@ import sys
 import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from src.evaluation.error_categorizer import ErrorCategorizer, ErrorType
+from src.evaluation.error_categorizer import ErrorCategorizer
 from src.evaluation.validators import ResponseValidator
 from src.evaluation.hitl_feedback import HITLFeedbackSystem, FeedbackType, QualityRating
 from src.prompts.template_manager import PromptTemplateManager, PromptOptimizer
