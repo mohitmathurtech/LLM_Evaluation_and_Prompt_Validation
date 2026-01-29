@@ -1,0 +1,109 @@
+# Benchmark test cases for evaluating prompts against specific datasets
+#
+# This file defines test cases that can be used to benchmark prompt performance
+# and validate that prompts produce expected outputs.
+
+test_cases:
+  - id: tc_001
+    category: factual_qa
+    prompt: "What is the capital of France?"
+    expected_elements:
+      - "Paris"
+    expected_quality:
+      min_clarity_score: 0.8
+      min_completeness_score: 0.9
+    
+  - id: tc_002
+    category: factual_qa
+    prompt: "Explain the process of photosynthesis."
+    expected_elements:
+      - "sunlight"
+      - "carbon dioxide"
+      - "oxygen"
+      - "glucose"
+    expected_quality:
+      min_clarity_score: 0.7
+      min_completeness_score: 0.8
+      min_reasoning_depth: 0.7
+    
+  - id: tc_003
+    category: code_explanation
+    prompt: "Explain this Python function: def factorial(n): return 1 if n <= 1 else n * factorial(n-1)"
+    expected_elements:
+      - "recursive"
+      - "base case"
+      - "multiplication"
+    expected_quality:
+      min_clarity_score: 0.75
+      min_completeness_score: 0.8
+    
+  - id: tc_004
+    category: summarization
+    prompt: "Summarize the following text: [Long article about climate change]"
+    expected_elements:
+      - "climate"
+      - "temperature"
+      - "impact"
+    expected_quality:
+      min_clarity_score: 0.8
+      max_response_length: 200
+      min_response_length: 50
+    
+  - id: tc_005
+    category: reasoning
+    prompt: "If all A are B, and all B are C, what can we conclude about A and C?"
+    expected_elements:
+      - "transitive"
+      - "all A are C"
+    expected_quality:
+      min_reasoning_depth: 0.8
+      min_clarity_score: 0.7
+
+reference_facts:
+  geography:
+    - key: "capital of France"
+      value: "Paris"
+    - key: "capital of Japan"
+      value: "Tokyo"
+    - key: "capital of USA"
+      value: "Washington D.C."
+  
+  science:
+    - key: "speed of light"
+      value: "299,792,458 meters per second"
+    - key: "chemical formula for water"
+      value: "H2O"
+    - key: "smallest unit of life"
+      value: "cell"
+  
+  history:
+    - key: "year of moon landing"
+      value: "1969"
+    - key: "first president of USA"
+      value: "George Washington"
+
+hallucination_indicators:
+  - "I remember"
+  - "I recall"
+  - "From my experience"
+  - "I think I saw"
+  - "In my opinion"
+
+quality_thresholds:
+  excellent:
+    min_overall_score: 0.9
+    min_clarity: 0.85
+    min_completeness: 0.9
+    min_reasoning: 0.8
+  
+  good:
+    min_overall_score: 0.75
+    min_clarity: 0.7
+    min_completeness: 0.75
+    min_reasoning: 0.65
+  
+  acceptable:
+    min_overall_score: 0.6
+    min_clarity: 0.6
+    min_completeness: 0.6
+    min_reasoning: 0.5

@@ -139,7 +139,7 @@ class ResponseValidator:
             return ValidationMetric(
                 name="Clarity",
                 score=0.0,
-                threshold=self.config["min_clarity_score"],
+                threshold=self.config.get("min_clarity_score", 0.7),
                 passed=False,
                 details="Response contains no complete sentences"
             )
@@ -164,11 +164,13 @@ class ResponseValidator:
         # Calculate final clarity score
         clarity_score = (length_score + transition_score) / 2
         
+        threshold = self.config.get("min_clarity_score", 0.7)
+        
         return ValidationMetric(
             name="Clarity",
             score=clarity_score,
-            threshold=self.config["min_clarity_score"],
-            passed=clarity_score >= self.config["min_clarity_score"],
+            threshold=threshold,
+            passed=clarity_score >= threshold,
             details=f"Average sentence length: {avg_length:.1f} words"
         )
     
@@ -187,7 +189,7 @@ class ResponseValidator:
             return ValidationMetric(
                 name="Completeness",
                 score=0.8,
-                threshold=self.config["min_completeness_score"],
+                threshold=self.config.get("min_completeness_score", 0.8),
                 passed=True,
                 details="No specific elements required"
             )
@@ -204,11 +206,13 @@ class ResponseValidator:
         if missing:
             details += f". Missing: {', '.join(missing[:3])}"
         
+        threshold = self.config.get("min_completeness_score", 0.8)
+        
         return ValidationMetric(
             name="Completeness",
             score=completeness_score,
-            threshold=self.config["min_completeness_score"],
-            passed=completeness_score >= self.config["min_completeness_score"],
+            threshold=threshold,
+            passed=completeness_score >= threshold,
             details=details
         )
     
@@ -245,11 +249,13 @@ class ResponseValidator:
         else:
             depth_score = 0.4
         
+        threshold = self.config.get("min_reasoning_depth", 0.6)
+        
         return ValidationMetric(
             name="Reasoning Depth",
             score=depth_score,
-            threshold=self.config["min_reasoning_depth"],
-            passed=depth_score >= self.config["min_reasoning_depth"],
+            threshold=threshold,
+            passed=depth_score >= threshold,
             details=f"Found {reasoning_count} reasoning indicators"
         )
     
@@ -257,8 +263,8 @@ class ResponseValidator:
         """Validate the response length is within acceptable bounds."""
         word_count = len(response.split())
         
-        min_length = self.config["min_response_length"]
-        max_length = self.config["max_response_length"]
+        min_length = self.config.get("min_response_length", 50)
+        max_length = self.config.get("max_response_length", 2000)
         
         if min_length <= word_count <= max_length:
             length_score = 1.0
