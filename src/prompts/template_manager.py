@@ -6,9 +6,13 @@ for loading, validating, and using prompt templates.
 """
 
 import yaml
+import logging
 from typing import Dict, List, Optional, Any
 from dataclasses import dataclass, field
 from pathlib import Path
+
+# Configure logging
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -80,8 +84,8 @@ class PromptTemplateManager:
         Returns:
             PromptTemplate object
         """
-        with open(yaml_path, 'r') as f:
-            data = yaml.safe_load(f)
+        with open(yaml_path, 'r') as yaml_file:
+            data = yaml.safe_load(yaml_file)
         
         template = PromptTemplate(
             name=data.get('name', 'unnamed'),
@@ -111,14 +115,14 @@ class PromptTemplateManager:
         for yaml_file in template_path.glob('*.yaml'):
             try:
                 self.load_template_from_yaml(str(yaml_file))
-            except Exception as e:
-                print(f"Error loading template from {yaml_file}: {e}")
+            except (FileNotFoundError, yaml.YAMLError) as e:
+                logger.warning(f"Error loading template from {yaml_file}: {e}")
         
         for yml_file in template_path.glob('*.yml'):
             try:
                 self.load_template_from_yaml(str(yml_file))
-            except Exception as e:
-                print(f"Error loading template from {yml_file}: {e}")
+            except (FileNotFoundError, yaml.YAMLError) as e:
+                logger.warning(f"Error loading template from {yml_file}: {e}")
     
     def get_template(self, name: str) -> Optional[PromptTemplate]:
         """
@@ -181,8 +185,8 @@ class PromptTemplateManager:
             'tags': template.tags
         }
         
-        with open(output_path, 'w') as f:
-            yaml.dump(data, f, default_flow_style=False, sort_keys=False)
+        with open(output_path, 'w') as yaml_file:
+            yaml.dump(data, yaml_file, default_flow_style=False, sort_keys=False)
 
 
 class PromptOptimizer:

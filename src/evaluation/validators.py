@@ -10,6 +10,19 @@ from dataclasses import dataclass, field
 from enum import Enum
 import re
 
+# Sentence length constants for clarity validation
+OPTIMAL_SENTENCE_MIN = 15
+OPTIMAL_SENTENCE_MAX = 25
+ACCEPTABLE_SENTENCE_MIN = 10
+ACCEPTABLE_SENTENCE_MAX = 35
+
+# Reasoning depth constants
+MIN_REASONING_INDICATORS = 2
+MAX_REASONING_INDICATORS = 5
+
+# Error categorizer constants
+MAX_AVG_SENTENCE_LENGTH_WORDS = 40
+
 
 class ValidationStatus(Enum):
     """Status of validation result."""
@@ -148,9 +161,9 @@ class ResponseValidator:
         avg_length = sum(len(s.split()) for s in sentences) / len(sentences)
         
         # Score based on sentence length (optimal: 15-25 words)
-        if 15 <= avg_length <= 25:
+        if OPTIMAL_SENTENCE_MIN <= avg_length <= OPTIMAL_SENTENCE_MAX:
             length_score = 1.0
-        elif 10 <= avg_length < 15 or 25 < avg_length <= 35:
+        elif ACCEPTABLE_SENTENCE_MIN <= avg_length < OPTIMAL_SENTENCE_MIN or OPTIMAL_SENTENCE_MAX < avg_length <= ACCEPTABLE_SENTENCE_MAX:
             length_score = 0.8
         else:
             length_score = 0.5
@@ -240,11 +253,11 @@ class ResponseValidator:
         )
         
         # Score based on frequency (optimal: 2-5 instances)
-        if 2 <= reasoning_count <= 5:
+        if MIN_REASONING_INDICATORS <= reasoning_count <= MAX_REASONING_INDICATORS:
             depth_score = 1.0
         elif reasoning_count == 1:
             depth_score = 0.7
-        elif reasoning_count > 5:
+        elif reasoning_count > MAX_REASONING_INDICATORS:
             depth_score = 0.85
         else:
             depth_score = 0.4

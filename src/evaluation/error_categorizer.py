@@ -10,6 +10,9 @@ from enum import Enum
 from typing import Dict, List, Optional
 from dataclasses import dataclass
 
+# Clarity assessment constant
+MAX_AVG_SENTENCE_LENGTH_WORDS = 40
+
 
 class ErrorType(Enum):
     """Enumeration of error types in LLM responses."""
@@ -202,7 +205,7 @@ class ErrorCategorizer:
         sentences = response.split('.')
         avg_sentence_length = sum(len(s.split()) for s in sentences) / max(len(sentences), 1)
         
-        if avg_sentence_length > 40:
+        if avg_sentence_length > MAX_AVG_SENTENCE_LENGTH_WORDS:
             error = ErrorInstance(
                 error_type=ErrorType.CLARITY_ISSUE,
                 severity=ErrorSeverity.LOW,

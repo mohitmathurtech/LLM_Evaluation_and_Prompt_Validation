@@ -253,8 +253,8 @@ class HITLFeedbackSystem:
             "statistics": self.get_feedback_statistics()
         }
         
-        with open(filepath, 'w') as f:
-            json.dump(data, f, indent=2)
+        with open(filepath, 'w') as json_file:
+            json.dump(data, json_file, indent=2)
     
     def generate_feedback_report(self) -> str:
         """
